@@ -57,3 +57,17 @@ quit;
 proc greplay igout=work.gseg tc=sashelp.templt template=l2r2 nofs; 
 treplay 1:graph4 2:graph6 3:graph5; 
 run; 
+
+*Choropleth US map of the median AQI; 
+proc import out=AQIdata datafile="C:\Users\bushr\OneDrive\Desktop\AQI_by_County.csv" dbms=csv replace; 
+run; 
+title "Median AQI in 2020 in US by County"; 
+proc gproject data=maps.counties out=contUScounties; 
+where state not in(2,15,72); 
+id state county; 
+run; 
+proc gmap data=AQIdata map=contUScounties all; 
+id state county; 
+choro medianAQI; 
+run; 
+quit; 
