@@ -71,3 +71,12 @@ id state county;
 choro medianAQI; 
 run; 
 quit; 
+
+*For Arizona;
+title "Median AQI in 2020 in Arizona by County"; 
+proc gmap data=AQIdata map=contUScounties all; 
+id state county; 
+where state eq 4; 
+choro medianAQI; 
+run; 
+quit; 
